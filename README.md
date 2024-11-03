@@ -70,14 +70,6 @@ python main/backend.py
 
 - Since the x axis has been changed to index and not date, if a security's pricing didnt start at the same time as one it is being compared to the graph is completely wrong. Mainly an issue for newer companies, pretty much always an issues on 'Max' tab
 
-## BACKEND
-
-Uses yfinance
-
-## FRONTEND
-
-Uses angular and ngx charts
-
 ## DEPENDENCIES
 ### BACKEND 
 Can be found in 
