@@ -38,3 +38,6 @@ Thumbs.db
 /frontend/security-app/.env.local
 /frontend/security-app/.env.development
 /frontend/security-app/.env.production
+
+# Ignore venv
+/backend/venv/
