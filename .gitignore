@@ -1,1 +1,40 @@
-/.vscode
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency directories
+/frontend/security-app/node_modules/
+
+# Compiled output
+/frontend/security-app/dist/
+/frontend/security-app/tmp/
+/frontend/security-app/out-tsc/
+/frontend/security-app/.angular/cache/
+/frontend/security-app/.sass-cache/
+
+# Angular specific files
+/frontend/security-app/public/
+
+# IDEs and editors
+/.idea/
+/.vscode/
+*.sublime-workspace
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Miscellaneous
+*.tgz
+*.zip
+*.tar.gz
+*.rar
+
+# Ignore environment files
+/frontend/security-app/.env
+/frontend/security-app/.env.local
+/frontend/security-app/.env.development
+/frontend/security-app/.env.production
