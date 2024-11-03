@@ -2,13 +2,19 @@
 
 Just messing around
 
+## CHANGELOG
+
+### 03/11/2024
+- Fixed date formatting on graph
+- Text aligned 3 facts for security to the right
+
 ## BACKEND
 
 Uses yfinance
 
 ## FRONTEND
 
-Use angular and ngx charts
+Uses angular and ngx charts
 
 ## DEPENDENCIES
 
