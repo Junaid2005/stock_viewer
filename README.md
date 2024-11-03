@@ -4,7 +4,6 @@ Just messing around
 
 ## SETUP
 
-# Setup Instructions for Project 
 ## Cloning
 ```bash
 git clone https://github.com/Junaid2005/stock_viewer.git
@@ -80,8 +79,15 @@ Uses yfinance
 Uses angular and ngx charts
 
 ## DEPENDENCIES
+### BACKEND 
+Can be found in 
+```bash
+backend/main/requirements.txt
+```
 
-{need to write this}
+### FRONTEND
+{need to write properly}
+Uses ngx-charts
 
 ## TODO
 - Logger module
@@ -95,3 +101,4 @@ Uses angular and ngx charts
 - Open close line on graph
 - X axis formatting
 - Some prices come in at like 4.5 when they should be 4.50
+- Tooltip
