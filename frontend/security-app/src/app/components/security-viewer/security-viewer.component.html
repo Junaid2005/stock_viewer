@@ -1,0 +1,91 @@
+<div style="margin: 2rem;">
+	<h2>[title]</h2>
+
+	<mat-form-field>
+		<mat-label>Identifier</mat-label>
+		<input matInput [(ngModel)]="formIdentifier" placeholder="e.g. AAPL">
+	</mat-form-field>
+
+	<button mat-fab (click)="fetchSecurity(formIdentifier)" [disabled]="!formIdentifier" style="margin-left: 0.5rem;">
+		<mat-icon>search</mat-icon>
+	</button>
+
+	<mat-card appearance="outlined">
+		<mat-card-content>
+			<mat-progress-bar mode="indeterminate" *ngIf="loadingSecurity" style="margin-bottom: 1rem;"></mat-progress-bar>
+			<div *ngIf="homeSecurityInfo">
+				<div style="display: flex; justify-content: space-between;">
+					<span>
+						<div style="display: flex;">
+							<p style="font-size: xx-large;">{{ homeSecurityInfo.shortName }}</p>
+							<p style="color: grey; margin-left: 0.5rem; align-content: center;">{{ homeSecurityInfo.symbol }}</p>
+						</div>
+						<div style="display: flex;">
+							<p style="font-size: x-large;">{{ homeSecurityInfo.currentPrice.toFixed(2) }}</p>
+							<p style="color: grey; margin-left: 0.5rem; align-content: center;">{{ homeSecurityInfo.currency }}</p>
+						</div>
+						<div *ngIf="homeSecurityInfo.stats">
+							<p [style.color]="homeSecurityInfo.stats.priceDiff >= 0 ? 'green' : 'red'"><span *ngIf="homeSecurityInfo.stats.priceDiff >= 0">+</span>{{ homeSecurityInfo.stats.priceDiff.toFixed(2) }} ({{ homeSecurityInfo.stats.percentDiff.toFixed(2) }}%) {{ homeSecurityInfo.stats.priceTimeRange }} </p>
+						</div>
+						<p style="color: grey; font-size: small;">{{ currentTime | date: 'EEE d/M/yy HH:mm' }}</p>
+					</span>
+					<span style="text-align: right;">
+						<p style="margin-bottom: 0.1rem; font-size: small;">Type: {{homeSecurityInfo.quoteType}}</p>
+						<p style="margin-bottom: 0.1rem; font-size: small;">Sector: {{homeSecurityInfo.sectorDisp}}</p>
+						<p style="margin-bottom: 0.1rem; font-size: small;">Market Cap: {{homeSecurityInfo.marketCap}}</p>
+					</span>
+				</div>
+
+				<div *ngIf="mainSecurities">
+					<mat-card>
+						<mat-tab-group (selectedTabChange)="onTabChanged($event)" [(selectedIndex)]="selectedTabIndex">
+							<mat-tab label="1D"></mat-tab>
+							<mat-tab label="1W"></mat-tab>
+							<mat-tab label="1M"></mat-tab>
+							<mat-tab label="3M"></mat-tab>
+							<mat-tab label="YTD"></mat-tab>
+							<mat-tab label="1Y"></mat-tab>
+							<mat-tab label="5Y"></mat-tab>
+							<mat-tab label="Max"></mat-tab>
+						  </mat-tab-group>
+					</mat-card>
+					
+					<div style="width: 80%;">
+						<ngx-charts-line-chart 
+							[results]="pricingData"
+							[xAxis]="true"
+							[yAxis]="true"
+							[xAxisTickFormatting]="xAxisTickFormattingFn"
+							[showGridLines]="true"
+							[autoScale]="true"
+							[animations]="true"
+							[legend]="true">
+						</ngx-charts-line-chart> 
+					</div>
+
+					<mat-form-field style="width: 100%;">
+						<mat-label>Currently Viewing:</mat-label>
+						<mat-chip-grid #chipGrid>
+						  	@for (security of mainSecurities; track security) {
+								<mat-chip-row (removed)="removeSecurity(security.ticker)">
+									{{security.ticker}}
+								<button matChipRemove>
+									<mat-icon>cancel</mat-icon>
+								</button>
+								</mat-chip-row>
+						  	}
+							<input
+								placeholder="Compare with"
+								[matChipInputFor]="chipGrid"
+								[matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+								[matChipInputAddOnBlur]="true"
+								(matChipInputTokenEnd)="addSecurity($event)"
+							/>
+						</mat-chip-grid>
+					</mat-form-field>
+				</div>
+			</div>
+		</mat-card-content>
+	</mat-card>
+	<p *ngIf="homeSecurityInfo" style="float: right; font-size: xx-small; color: grey;">junjun</p>
+</div>
